@@ -1,33 +1,36 @@
-import plotly.plotly as py
-import plotly.graph_objs as go
-
+import matplotlib.pyplot as plt
 import numpy as np
 
-input_string = input("Enter lists of data separated by comma and space")
-data_list = input_string.split("], [")
+data_list = [[0, 0, 0.1], [0, 1, 0.2], [5, 0, 0.3], [5, 1, 0.4], [10, 0, 0.6], [10, 1, 0.4]]
 
-for z in data_list:
-    print (z)
-
-
-
-#if i data is not organized by age, use sorting algorithm to sort by age
 men_count = 0
 women_count = 0
-for x in data_list:
-    if data_list[x][1] == "1":
-        womens_list[women_count] = data_list[x][2]
+womens_list = []
+mens_list = []
+w_age = []
+m_age = []
+
+length = len(data_list)
+i = 0
+while i < length:
+    if data_list[i][1] == 1:
+        womens_list.insert(women_count, data_list[i][2])
+        w_age.insert(women_count, data_list[i][0])
+        women_count = women_count + 1
+        i = i + 1
     else:
-        mens_list[men_count] = data_list[x][2]
+        mens_list.insert(men_count, data_list[i][2])
+        m_age.insert(men_count, data_list[i][0])
+        men_count = men_count + 1
+        i = i + 1
 
-for i in womens_list:
-    print(i)
+#y = range(0, 1)
 
-layout = go.Layout(yaxis=go.layout.YAxis(range=[0,150], title='Age'),
-                   xaxis=go.layout.XAxis(
-                       range=[-100, 100],
-                       tickvals=[-100, -70, -30, 0, 30, 70, 100],
-                       ticktext=[100, 70, 30, 0, 30, 70, 100],
-                       title='Percent of Population'),
-                   barmode='overlay',
-                   bargap=0.1)
+fig, axes = plt.subplots(ncols = 2, sharey = True)
+axes[0].barh(m_age, mens_list, align = 'center', color = 'yellow')
+axes[0].invert_xaxis()
+axes[0].set(title = 'Men')
+axes[1].barh(w_age, womens_list, align = 'center', color = 'gray')
+axes[1].set(title = 'Women')
+
+plt.show()
