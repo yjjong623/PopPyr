@@ -42,5 +42,4 @@ axis[0].set_ylabel('Age')
 axis[0].set_xlabel('Percent of Population')
 axis[1].set_xlabel('Percent of Population')
 
-#axes[0].set(yticks=5, yticklabels=y_label)
 plt.show()
