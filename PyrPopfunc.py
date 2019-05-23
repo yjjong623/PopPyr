@@ -1,13 +1,12 @@
 def PlotPyr(data_list, xlim, ylim):
-    import matplotlib.pyplot as plt
-    import numpy as np
-
     men_count = 0
     women_count = 0
     womens_list = []
     mens_list = []
     w_age = []
     m_age = []
+    width = 5
+
     length = len(data_list)
     i = 0
     while i < length:
@@ -22,12 +21,21 @@ def PlotPyr(data_list, xlim, ylim):
             men_count = men_count + 1
             i = i + 1
 
-    fig, axes = plt.subplots(ncols = 2, sharey = True)
-    xmin, xmax, ymin, ymax = axis([0, xlim, 0, ylim])
-    axes[0].barh(m_age, mens_list, align = 'center', color = 'yellow')
-    axes[0].invert_xaxis()
-    axes[0].set(title = 'Men')
-    axes[1].barh(w_age, womens_list, align = 'center', color = 'gray')
-    axes[1].set(title = 'Women')
 
-    plt.show()
+    fig, axis= plt.subplots(ncols = 2, sharey = True, tight_layout=True)
+    fig.suptitle('Population Pyramid')
+    plt.setp(axis, yticks=[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100],
+    yticklabels=['0-4', '5-9', '10-14', '15-19', '20-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65-69', '70-74',
+    '75-79', '80-89', '90-94', '95-100', '100+'])
+    axis[0].xmin, axis[0].xmax, axis[0].ymin, axis[0].ymax = axis[0].axis([0, xlim, 0, ylim])
+    axis[1].xmin, axis[1].xmax, axis[1].ymin, axis[1].ymax = axis[1].axis([0, xlim, 0, ylim])
+    axis[0].barh(m_age, mens_list, width, align = 'edge', color = 'brown', edgecolor = 'black')
+    axis[0].invert_xaxis()
+    axis[0].set(title = 'Men')
+    axis[1].barh(w_age, womens_list, width, align = 'edge', color = 'gray', edgecolor = 'black')
+    axis[1].set(title = 'Women')
+    axis[0].set_ylabel('Age')
+    axis[0].set_xlabel('Percent of Population')
+    axis[1].set_xlabel('Percent of Population')
+
+    return fig
