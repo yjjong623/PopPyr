@@ -1,4 +1,7 @@
-def PlotPyr(data_list, xlim, ylim):
+import numpy as np
+import matplotlib.pyplot as plt
+
+def PlotPyr(data_list, xlim, ylim, title):
     men_count = 0
     women_count = 0
     womens_list = []
@@ -23,7 +26,7 @@ def PlotPyr(data_list, xlim, ylim):
 
 
     fig, axis= plt.subplots(ncols = 2, sharey = True, tight_layout=True)
-    fig.suptitle('Population Pyramid')
+    fig.suptitle(title)
     plt.setp(axis, yticks=[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100],
     yticklabels=['0-4', '5-9', '10-14', '15-19', '20-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65-69', '70-74',
     '75-79', '80-89', '90-94', '95-100', '100+'])
@@ -39,3 +42,9 @@ def PlotPyr(data_list, xlim, ylim):
     axis[1].set_xlabel('Percent of Population')
 
     return fig
+
+
+
+data_table = [[0, 0, 0.1], [0, 1, 0.2], [5, 0, 0.3], [5, 1, 0.4], [10, 0, 0.6], [10, 1, 0.4]]
+pyrfig = PlotPyr(data_table, 0.7, 20, 'Pop')
+plt.show(pyrfig)
