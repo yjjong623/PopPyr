@@ -8,8 +8,10 @@ def PlotPyr(data_list, numSim, xlim, ylim, title):
     mens_list = []
     w_age = []
     m_age = []
+    #width of the bars
     width = 5
 
+    #sort into womens_list and mens_list to plot
     length = len(data_list)
     i = 0
     women_count = 0
@@ -28,6 +30,7 @@ def PlotPyr(data_list, numSim, xlim, ylim, title):
             men_count = men_count + 1
             i = i + 1
 
+    #plot
     fig, axis= plt.subplots(ncols = 2, sharey = True, tight_layout=True)
     st = fig.suptitle(title)
     plt.setp(axis, yticks=[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100],
@@ -55,22 +58,23 @@ def PlotPyr(data_list, numSim, xlim, ylim, title):
             while k < len(numSim[j]):
                 if numSim[j][k][1] == 1:
                     axis[0].plot(numSim[j][k][2] * 100, numSim[j][k][0], marker = 'o', markersize = 3, color = "blue")
-                    #women_count = women_count + 1
                     k = k + 1
                 else:
                     axis[1].plot(numSim[j][k][2] * 100, numSim[j][k][0], marker = 'o', markersize = 3, color = "blue")
-                    #men_count = women_count + 1
                     k = k + 1
+            k = 0
             j = j + 1
-
+    else:
+        pass
 
     fig.tight_layout()
     st.set_y(1.0)
     fig.subplots_adjust(top=0.6)
     return fig
 
+#testing 
 data_table = [[0, 0, 0.1], [0, 1, 0.2], [5, 0, 0.3], [5, 1, 0.4], [10, 0, 0.6], [10, 1, 0.4]]
 num_table = [[[0, 0, 0.5], [0, 1, 0.3], [5, 0, 0.5], [5, 1, 0.6]],
 [[0, 0, 0.2], [0, 1, 0.4], [5, 0, 0.9], [5, 1, 0.4]]]
-pyrfig = PlotPyr(data_table, num_table, 70, 20, 'Population Pyramid')
+pyrfig = PlotPyr(data_table, num_table, 100, 20, 'Population Pyramid')
 plt.show(pyrfig)
