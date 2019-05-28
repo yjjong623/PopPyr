@@ -2,6 +2,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def PlotPyr(data_list, numSim, xlim, ylim, title, yticks_place, ylabels_name):
+    """
+    Purpose of function: create a population pyramid with data list input
+    data_list: list of lists that is formatted like [age (grouped into 5's, 0 = 0 - 4 year olds),
+            gender (0 = male, 1 = female),
+            percent of population in decimal (0.6 = 60%)]
+    numSim: list of list of lists that is the result of other simulations,
+            if none, then user puts in []
+    xlim: user input for limit of x
+    ylim: user input for limit of y
+    title: Title of graph output
+    yticks_place: list of the placement of yticks
+    ylabels_name: names of the y labels in a list
+    """
     men_count = 0
     women_count = 0
     #men and women percent of population array
@@ -72,10 +85,10 @@ def PlotPyr(data_list, numSim, xlim, ylim, title, yticks_place, ylabels_name):
         while j < num_length:
             while k < len(numSim[j]):
                 if numSim[j][k][1] == 1:
-                    axis[0].plot(numSim[j][k][2] * 100, numSim[j][k][0], marker = 'o', mec = "black", markersize = 5, color = "blue", alpha = 0.6)
+                    axis[0].plot(numSim[j][k][2] * 100, numSim[j][k][0], marker = '|', mec = "red", color = "blue", alpha = 0.6)
                     k = k + 1
                 else:
-                    axis[1].plot(numSim[j][k][2] * 100, numSim[j][k][0], marker = 'o', mec = "black", markersize = 5, color = "blue", alpha = 0.6)
+                    axis[1].plot(numSim[j][k][2] * 100, numSim[j][k][0], marker = '|', mec = "red", color = "blue", alpha = 0.6)
                     k = k + 1
             k = 0
             j = j + 1
